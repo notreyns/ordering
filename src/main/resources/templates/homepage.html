@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>My Movies</title>
+    <title th:text="${title}"></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -18,43 +18,55 @@
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
 <div th:insert="blocks/header :: header"></div>
+<div class="jumbotron text-center">
+    <div class="text-block">
+        <h1 style="font-family:'Kaushan Script', cursive;">3d Printing Service</h1>
+        <p><i>Upload your 3D model, choose from different finishes and materials, select the size of your print, receive a price quote instantly and let us take care of printing and shipping your products.</i></p>
+    </div>
+</div>
 
-<!-- Container (Collection Section) -->
-<div id="services" class="container-fluid text-center bg-grey">
-    <h2>COLLECTIONS</h2>
+<div id="shapes-list" class="container-fluid text-center bg-grey">
+    <h2>CHOOSE SHAPE</h2>
+    <div class="row text-center slideanim" >
+        <div class="col-sm-4" th:each="a:${Items}">
+            <div class="thumbnail">
+                <img th:src="@{/images/[[${a.imageName}]]}"/> alt="shape image" width="400" height="300">
+                <p th:iniline="text">[[${a.name}]]><strong></strong></p>
+                <p><button type="button" class="btn">Choose</button></a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="colors-list" class="container-fluid text-center bg-grey">
+    <h2>PICK COLOR</h2>
     <div class="row text-center slideanim">
         <div class="col-sm-4">
-            <div class="thumbnail">
+            <div class="radio">
+                <label><input type="radio" name="colorradio" checked>Option 1</label>
+            </div>
+        </div>
+    </div>
+</div>
 
-                <img src="plants/harvest.jpg" alt="full-length" width="400" height="300">
-                <p><strong>Films</strong></p>
-                <p>Ful-length movies of various genres</p>
-                <p><a href="/movie-list"><button type="button" class="btn">View List</button></a></p>
-            </div>
-        </div>
+<div id="materials-list" class="container-fluid text-center bg-grey">
+    <h2>CHOOSE MATERIAL</h2>
+    <div class="row text-center slideanim">
         <div class="col-sm-4">
-            <div class="thumbnail">
-                <img src="plants/sunnymorning.jpg" alt="cartoon" width="400" height="300">
-                <p><strong>Animated films</strong></p>
-                <p>full-length, without continuation</p>
-                <p><a href="/cartoons-list"><button type="button" class="btn">View List</button></a></p>
+            <div class="radio">
+                <label><input type="radio" name="materialradio" checked>Option 1</label>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="thumbnail">
-                <img src="https://avatars.mds.yandex.net/get-kinopoisk-image/1599028/2f4bd9ea-ec01-4fa9-9812-575158aa71f2/600x900" width="400" height="300" >
-
-                <p><strong>Series</strong></p>
-                <p>a lot of teenage..</p>
-                <p><a href="/series-list"><button type="button" class="btn">View List</button></a></p>
-            </div>
-        </div>
+    </div>
+</div>
+<div id="order-button" class="container-fluid text-center bg-grey">
+    <div class="text-center slideanim">
+            <p><button type="button" class="btn">ORDER</button></a></p>
     </div>
 </div>
 <div th:insert="blocks/footer :: footer"></div>
 
 <script>
-    //smooth scrolling
     $(document).ready(function(){
         $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
             if (this.hash !== "") {
@@ -64,8 +76,6 @@
                 $('html, body').animate({
                     scrollTop: $(hash).offset().top
                 }, 900, function(){
-
-
                     window.location.hash = hash;
                 });
             }
