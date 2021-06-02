@@ -41,9 +41,9 @@
 <div id="colors-list" class="container-fluid text-center bg-grey">
     <h2>PICK COLOR</h2>
     <div class="row text-center slideanim">
-        <div class="col-sm-4">
+        <div class="col-sm-2" th:each="color : ${colors}">
             <div class="radio">
-                <label><input type="radio" name="colorradio" checked>Option 1</label>
+                <label ><input type="radio" name="colorradio" checked th:text="${color.colorName}"></label>
             </div>
         </div>
     </div>
@@ -52,9 +52,9 @@
 <div id="materials-list" class="container-fluid text-center bg-grey">
     <h2>CHOOSE MATERIAL</h2>
     <div class="row text-center slideanim">
-        <div class="col-sm-4">
+        <div class="col-sm-3" th:each="mater: ${materials}">
             <div class="radio">
-                <label><input type="radio" name="materialradio" checked>Option 1</label>
+                <label><input type="radio" name="materialradio" checked th:text="${mater.materialName}"></label>
             </div>
         </div>
     </div>
