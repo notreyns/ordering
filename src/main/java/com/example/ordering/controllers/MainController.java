@@ -56,8 +56,7 @@ public class MainController {
         model.addAttribute("material", materialradio);
         return "basket";
     }
-
-
+    
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("items", itemsRepository.findAll());
