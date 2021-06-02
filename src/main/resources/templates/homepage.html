@@ -28,10 +28,10 @@
 <div id="shapes-list" class="container-fluid text-center bg-grey">
     <h2>CHOOSE SHAPE</h2>
     <div class="row text-center slideanim" >
-        <div class="col-sm-4">
+        <div class="col-sm-4" th:each="item : ${items}">
             <div class="thumbnail">
                 <img src="" alt="shape image" width="400" height="300">
-                <p><strong></strong></p>
+                <p th:text="item.name"><strong></strong></p>
                 <p><button type="button" class="btn">Choose</button></a></p>
             </div>
         </div>
