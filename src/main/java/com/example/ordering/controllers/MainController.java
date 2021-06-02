@@ -15,6 +15,8 @@ public class MainController {
     private ColorsRepository colorsRepo;
     @Autowired
     private MaterialsRepository materialsRepo;
+    @Autowired
+    private BasketRepository basketRepo;
 
     @PostMapping("/shape/add")
     public @ResponseBody
@@ -43,6 +45,18 @@ public class MainController {
     Iterable<Items> getAllItems() {
         return itemsRepository.findAll();
     }
+
+    @GetMapping("/basket/add")
+    public String basket(Integer id, @RequestParam String name, @RequestParam String colorradio,@RequestParam String materialradio, Model model){
+        Basket baskElem= new Basket(id, name, colorradio, materialradio);
+        basketRepo.save(baskElem);
+        model.addAttribute("orders",basketRepo.findAll() );
+        model.addAttribute("order", baskElem.getName());
+        model.addAttribute("color", baskElem.getColorradio());
+        model.addAttribute("material", materialradio);
+        return "basket";
+    }
+
 
     @GetMapping("/")
     public String home(Model model) {

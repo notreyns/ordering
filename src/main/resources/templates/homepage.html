@@ -24,14 +24,14 @@
         <p><i>Upload your 3D model, choose from different finishes and materials, select the size of your print, receive a price quote instantly and let us take care of printing and shipping your products.</i></p>
     </div>
 </div>
-
+<form action="/basket/add" method="post" id="userForm">
 <div id="shapes-list" class="container-fluid text-center bg-grey">
     <h2>CHOOSE SHAPE</h2>
     <div class="row text-center slideanim" >
         <div class="col-sm-4" th:each="item : ${items}">
             <div class="thumbnail">
                 <img th:src="'/images/' + ${item.imageName} +'.png'" alt="shape image" width="400" height="300">
-                <p th:text="${item.name}"><strong></strong></p>
+                <p th:text="${item.name}" id="name" name="name"><strong></strong></p>
                 <p><button type="button" class="btn" id="chooseShape" onclick="itemChosen()">Choose</button></a></p>
             </div>
         </div>
@@ -43,7 +43,7 @@
     <div class="row text-center slideanim">
         <div class="col-sm-2" th:each="color : ${colors}">
             <div class="radio">
-                <label ><input type="radio" name="colorradio" checked th:text="${color.colorName}"></label>
+                <label ><input type="radio" name="colorradio" id="colorradio" checked th:text="${color.colorName}"></label>
             </div>
         </div>
     </div>
@@ -54,19 +54,31 @@
     <div class="row text-center slideanim">
         <div class="col-sm-3" th:each="mater: ${materials}">
             <div class="radio">
-                <label><input type="radio" name="materialradio" checked th:text="${mater.materialName}"></label>
+                <label><input type="radio" name="materialradio" id="materialradio" checked th:text="${mater.materialName}"></label>
             </div>
         </div>
     </div>
 </div>
 <div id="order-button" class="container-fluid text-center bg-grey">
     <div class="text-center slideanim">
-            <p><button type="button" class="btn">ORDER</button></a></p>
+            <p><button type="submit" class="btn" onclick="sendData()">ORDER</button></a></p>
     </div>
 </div>
+</form>
 <div th:insert="blocks/footer :: footer"></div>
 
 <script>
+    function sendData() {
+        console.log( JSON.stringify($("#userForm").serializeArray()));
+        $.ajax({
+            type: "POST",
+            url: "/basket/add",
+            data: JSON.stringify({"name": $("#name").val(), "color": $("#colorradio").val(), "material": $("#materialradio").val()}),
+            success: function(){ console.log("OK")},
+            dataType: "json",
+            contentType : "application/json"
+        });
+    }
 
     $(document).ready(function(){
         $(".navbar a, footer a[href='#myPage']").on('click', function(event) {

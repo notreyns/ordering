@@ -13,17 +13,20 @@
 <div id="myorders" class="container-fluid text-center bg-grey">
     <h2>ORDERS</h2>
     <div class="row text-center slideanim">
-        <div class="col-sm-4">
+        <div class="col-sm-4" th:each="element: ${orders}">
             <div class="thumbnail">
                 <img src="" alt="shape img" width="400" height="300">
-                <p><strong>Material name</strong></p>
-                <p>Color name</p>
+                <h3 th:text="${order}"></h3>
+                <p th:text="${material}"><strong></strong></p>
+                <p th:text="${color}"></p>
                 <p><button type="button" class="btn">Delete</button></p>
             </div>
         </div>
     </div>
 </div>
 <div th:insert="blocks/footer :: footer"></div>
+<script>
 
+</script>
 </body>
 </html>
