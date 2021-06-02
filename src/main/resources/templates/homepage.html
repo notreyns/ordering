@@ -30,9 +30,9 @@
     <div class="row text-center slideanim" >
         <div class="col-sm-4" th:each="item : ${items}">
             <div class="thumbnail">
-                <img th:src="@{'images/' + ${item.imageName}}" alt="shape image" width="400" height="300">
+                <img th:src="'/images/' + ${item.imageName} +'.png'" alt="shape image" width="400" height="300">
                 <p th:text="${item.name}"><strong></strong></p>
-                <p><button type="button" class="btn">Choose</button></a></p>
+                <p><button type="button" class="btn" id="chooseShape" onclick="itemChosen()">Choose</button></a></p>
             </div>
         </div>
     </div>
@@ -67,6 +67,7 @@
 <div th:insert="blocks/footer :: footer"></div>
 
 <script>
+
     $(document).ready(function(){
         $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
             if (this.hash !== "") {
