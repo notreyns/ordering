@@ -4,6 +4,7 @@ import com.example.ordering.pagesbehavior.Items;
 import com.example.ordering.pagesbehavior.ItemsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -25,5 +26,11 @@ public class MainController {
     public @ResponseBody
     Iterable<Items> getAllItems() {
         return itemsRepository.findAll();
+    }
+
+    @GetMapping("/")
+    public String home(Model model) {
+        model.addAttribute("items", itemsRepository.findAll());
+        return "homepage";
     }
 }
