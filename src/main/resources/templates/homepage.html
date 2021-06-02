@@ -30,8 +30,8 @@
     <div class="row text-center slideanim" >
         <div class="col-sm-4" th:each="item : ${items}">
             <div class="thumbnail">
-                <img src="" alt="shape image" width="400" height="300">
-                <p th:text="item.name"><strong></strong></p>
+                <img th:src="@{'images/' + ${item.imageName}}" alt="shape image" width="400" height="300">
+                <p th:text="${item.name}"><strong></strong></p>
                 <p><button type="button" class="btn">Choose</button></a></p>
             </div>
         </div>
