@@ -1,16 +1,24 @@
 package com.example.ordering.pagesbehavior;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+@Entity
 public class Items {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String name;
     private String imageName;
     private Double price;
 
-    public Items(){
-    }
-    public Items(String name, Double price, String imgName) {
+    public Items(){ }
+    public Items(Integer id, String name, String imgName, Double price) {
+        this.id=id;
         this.name = name;
-        this.price = price;
         this.imageName=imgName;
+        this.price = price;
     }
 
     public String getName() {
@@ -40,5 +48,13 @@ public class Items {
     }
     public String getImageName() {
         return imageName;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

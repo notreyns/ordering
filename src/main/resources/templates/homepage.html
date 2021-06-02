@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="${title}"></title>
+    <title></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -28,10 +28,10 @@
 <div id="shapes-list" class="container-fluid text-center bg-grey">
     <h2>CHOOSE SHAPE</h2>
     <div class="row text-center slideanim" >
-        <div class="col-sm-4" th:each="a:${Items}">
+        <div class="col-sm-4">
             <div class="thumbnail">
-                <img th:src="@{/images/[[${a.imageName}]]}"/> alt="shape image" width="400" height="300">
-                <p th:iniline="text">[[${a.name}]]><strong></strong></p>
+                <img src="" alt="shape image" width="400" height="300">
+                <p><strong></strong></p>
                 <p><button type="button" class="btn">Choose</button></a></p>
             </div>
         </div>
