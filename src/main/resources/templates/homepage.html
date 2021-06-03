@@ -21,18 +21,18 @@
 <div class="jumbotron text-center">
     <div class="text-block">
         <h1 style="font-family:'Kaushan Script', cursive;">3d Printing Service</h1>
-        <p><i>Upload your 3D model, choose from different finishes and materials, select the size of your print, receive a price quote instantly and let us take care of printing and shipping your products.</i></p>
+        <p><i>Choose your 3D model, choose from different finishes and materials, pick color and let us take care of printing and shipping your products.</i></p>
     </div>
 </div>
-<form action="/basket/add" method="post" id="userForm">
+<form action="/orders/add" method="post" id="userForm">
 <div id="shapes-list" class="container-fluid text-center bg-grey">
     <h2>CHOOSE SHAPE</h2>
-    <div class="row text-center slideanim" >
+    <div class="row text-center slideanim">
         <div class="col-sm-4" th:each="item : ${items}">
             <div class="thumbnail">
                 <img th:src="'/images/' + ${item.imageName} +'.png'" alt="shape image" width="400" height="300">
-                <p th:text="${item.name}" id="name" name="name"><strong></strong></p>
-                <p><button type="button" class="btn" id="chooseShape" onclick="itemChosen()">Choose</button></a></p>
+                <p th:text="${item.name}" th:value="${item.name}" id="name"><strong></strong></p>
+                <p><button type="button" class="btn" id="chooseShape">Choose</button></a></p>
             </div>
         </div>
     </div>
@@ -68,18 +68,6 @@
 <div th:insert="blocks/footer :: footer"></div>
 
 <script>
-    function sendData() {
-        console.log( JSON.stringify($("#userForm").serializeArray()));
-        $.ajax({
-            type: "POST",
-            url: "/basket/add",
-            data: JSON.stringify({"name": $("#name").val(), "color": $("#colorradio").val(), "material": $("#materialradio").val()}),
-            success: function(){ console.log("OK")},
-            dataType: "json",
-            contentType : "application/json"
-        });
-    }
-
     $(document).ready(function(){
         $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
             if (this.hash !== "") {

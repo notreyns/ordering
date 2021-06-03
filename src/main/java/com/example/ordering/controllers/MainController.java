@@ -40,28 +40,30 @@ public class MainController {
         return "OK";
     }
 
-    @GetMapping("/basket")
-    public @ResponseBody
-    Iterable<Items> getAllItems() {
-        return itemsRepository.findAll();
-    }
 
-    @GetMapping("/basket/add")
-    public String basket(Integer id, @RequestParam String name, @RequestParam String colorradio,@RequestParam String materialradio, Model model){
-        Basket baskElem= new Basket(id, name, colorradio, materialradio);
-        basketRepo.save(baskElem);
+    @GetMapping("/basket")
+    public String basket(Model model){
         model.addAttribute("orders",basketRepo.findAll() );
-        model.addAttribute("order", baskElem.getName());
-        model.addAttribute("color", baskElem.getColorradio());
-        model.addAttribute("material", materialradio);
         return "basket";
     }
-    
+    @PostMapping("/orders/add")
+    public String addNewOrder(@RequestParam String name,@RequestParam String colorradio, @RequestParam String materialradio, Model model) {
+        Basket item=new Basket(name,colorradio, materialradio);
+        basketRepo.save(item);
+        return "redirect:/";
+    }
+
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("items", itemsRepository.findAll());
         model.addAttribute("colors", colorsRepo.findAll());
         model.addAttribute("materials", materialsRepo.findAll());
         return "homepage";
+    }
+    @PostMapping("/orders/{id}/delete")
+    public String orderDelete(@PathVariable(value="id") int id, Model model){
+        Basket item = basketRepo.findById(id).orElseThrow(IllegalStateException::new);
+        basketRepo.delete(item);
+        return "redirect:/basket";
     }
 }

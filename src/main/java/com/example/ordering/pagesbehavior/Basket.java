@@ -22,8 +22,7 @@ public class Basket {
 
     public Basket() {
     }
-    public Basket(Integer id,String name, String colorradio, String materialradio){
-        this.id=id;
+    public Basket(String name, String colorradio, String materialradio){
         this.name= name;
         this.colorradio=colorradio;
         this.materialradio=materialradio;
