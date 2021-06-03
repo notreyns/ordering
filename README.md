@@ -12,10 +12,12 @@
 - rest api
 - postgre
 ## rest api
-* to add shape, go to /shape/add
+* to add shape(shape and price are within same database), go to /shape/add
 * to add color, go to /color/add
 * to add material, go to /material/add
-*to see orders on baasket, go to /basket
+* to see orders on basket, go to /basket
 * to add orders to basket, go to /orders/add
 * to delete order from basket, go to /orders/{id}/delete
 * main page on /
+*****
+## Make sure to upload image to /images/YOUR_IMAGE_NAME.png. 
